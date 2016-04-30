@@ -15,6 +15,14 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
+
+
+
+# http://stackoverflow.com/questions/24003316/guard-with-rspec-on-rails-4-giving-a-lot-of-warnings
+# Warningを消す
+config.warnings = false
+
+
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin
