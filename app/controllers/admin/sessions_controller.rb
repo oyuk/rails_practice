@@ -1,4 +1,4 @@
-class Admin::SessionsController < ApplicationController
+class Admin::SessionsController < Admin::Base
   def new
     if current_administrator
       redirect_to :admin_root
