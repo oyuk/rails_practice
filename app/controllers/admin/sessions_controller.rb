@@ -18,7 +18,8 @@ class Admin::SessionsController < Admin::Base
         flash.now.alert = 'アカウントが停止されています'
         render action: 'new'
       end
-      session[:admin_member_id] = administrator.id
+      session[:administrator_id] = administrator.id
+      logger.debug "session: #{session}"
       flash.notice = 'ログインしました。'
       redirect_to :admin_root
     else
@@ -28,7 +29,7 @@ class Admin::SessionsController < Admin::Base
   end
 
   def destroy
-    session.delete(:admin_member_id)
+    session.delete(:administrator_id)
     flash.notice = 'ログアウトしました。'
     redirect_to :admin_root
   end
