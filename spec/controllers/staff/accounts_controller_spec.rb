@@ -1,5 +1,9 @@
 require 'rails_helper'
 
+describe Staff::AccountsController, 'ログイン前' do
+  it_behaves_like 'a protected singular staff controller'
+end
+
 RSpec.describe Staff::AccountsController do
   describe '#show' do
   end
@@ -13,6 +17,7 @@ RSpec.describe Staff::AccountsController do
 
     before do
       session[:staff_member_id] = staff_member.id
+      session[:last_access_time] = 1.second.ago
     end
 
     it 'email属性を変更する' do

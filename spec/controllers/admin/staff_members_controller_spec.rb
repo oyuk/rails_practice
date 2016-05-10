@@ -1,7 +1,16 @@
 require 'rails_helper'
 
+describe Admin::StaffMembersController,'ログイン前' do
+  it_behaves_like 'a protected admin controller'
+end
+
 RSpec.describe Admin::StaffMembersController do
-  let(:params_hash){attributes_for(:staff_member)}
+  let(:params_hash) {attributes_for(:staff_member)}
+  let(:administrator) {create(:administrator)}
+
+  before do
+    session[:administrator_id] = administrator.id
+  end
 
   describe '#index' do
   end
