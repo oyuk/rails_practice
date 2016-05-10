@@ -1,0 +1,42 @@
+require 'rails_helper'
+
+RSpec.describe Staff::AccountsController do
+  describe '#show' do
+  end
+
+  describe '#edit' do
+  end
+
+  describe '#update' do
+    let(:params_hash) {attributes_for(:staff_member)}
+    let(:staff_member) {create(:staff_member)}
+
+    before do
+      session[:staff_member_id] = staff_member.id
+    end
+
+    it 'email属性を変更する' do
+      params_hash.merge!(email: 'test@example.com')
+      patch :update,id:staff_member.id,staff_member: params_hash
+      staff_member.reload
+      expect(staff_member.email).to eq('test@example.com')
+    end
+
+    it '例外ActionController::ParameterMissingが発生' do
+      bypass_rescue
+      expect {patch :update, id:staff_member.id}.to raise_error(ActionController::ParameterMissing)
+    end
+
+    it 'end_dateの値は書き換え不可' do
+      params_hash.merge!(end_date: Date.tomorrow)
+      expect {
+        patch :update, id:staff_member.id, staff_member: params_hash
+      }.not_to change {staff_member.end_date}
+    end
+
+  end
+
+  describe '#staff_member_params' do
+  end
+
+end
