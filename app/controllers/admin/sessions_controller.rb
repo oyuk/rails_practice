@@ -19,11 +19,13 @@ class Admin::SessionsController < Admin::Base
       if administrator.suspended?
         flash.now.alert = 'アカウントが停止されています'
         render action: 'new'
+      else
+        session[:administrator_id] = administrator.id
+        session[:last_access_time] = Time.current
+        logger.debug "session: #{session}"
+        flash.notice = 'ログインしました。'
+        redirect_to :admin_root
       end
-      session[:administrator_id] = administrator.id
-      logger.debug "session: #{session}"
-      flash.notice = 'ログインしました。'
-      redirect_to :admin_root
     else
       flash.now.alert = 'メールアドレスまたはパスワードが正しくありません。'
       render action: 'new'
