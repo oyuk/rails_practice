@@ -1,4 +1,6 @@
 class StaffMember < ActiveRecord::Base
+  has_many :events,class_name: 'StaffEvent', dependent: :destroy
+  
   before_validation do
     self.email_for_index = email.downcase if email
   end
@@ -14,5 +16,5 @@ class StaffMember < ActiveRecord::Base
   def active?
     !suspended? && start_date <= Date.today && (end_date.nil? || end_date > Date.today)
   end
-  
+
 end
