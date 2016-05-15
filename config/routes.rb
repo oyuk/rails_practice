@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     get 'login' => 'sessions#new', as: :login
     resource :session, only: [:create,:destroy]
     resource :account, except: [:new,:create,:destory]
+    resource :password, only: [:show,:edit,:update]
   end
 
   namespace :admin do
