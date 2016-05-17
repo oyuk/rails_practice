@@ -64,6 +64,11 @@ RSpec.describe StaffMember, :type => :model do
       member2 = build(:staff_member, email:member1.email)
       expect(member2).not_to be_valid
     end
+
+    it '漢字、ひらがな、アルファベット以外は無効' do
+      member = build(:staff_member, family_name: '*&')
+      expect(member).not_to be_valid
+    end
   end
 
 end
