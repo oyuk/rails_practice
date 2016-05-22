@@ -2,7 +2,15 @@ class StaffMemberFormPresenter < FormPresenter
 
   def password_field_block(name, label_text, options={})
     if object.new_record?
-      suepr(name,label_text,opitons)
+      suepr(name,label_text,options)
+    else
+      markup(:div, class: 'input-block') do |m|
+        m << decorated_label(name,label_text, options.merge(required: true))
+        m << password_field(name, options.merge(disabled: true))
+        m.button('変更する',type:'button',id:'enable-password-field')
+        m.button('変更しない',type:'button',id:'disable-password-field',stype: 'display: none')
+        m << error_messages_for(name)
+      end
     end
   end
 

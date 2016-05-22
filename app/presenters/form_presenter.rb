@@ -35,14 +35,20 @@ class FormPresenter
     def date_field_block(name, label_text, options = {})
       markup(:div, class: 'input-block') do |m|
           m << decorated_label(name,label_text,options)
+          if options[:class].kind_of?(String)
+            classes = options[:class].strip.split + ['datepicker']
+            options[:class] = classes.uniq.join(' ')
+          else
+            options[:class] = 'datepicker'
+          end
           m << text_field(name,options)
-          m << error_messages_for(name)          
+          m << error_messages_for(name)
         end
     end
 
     def error_messages_for(name)
       markup do |m|
-        object.errors.full_massages_for(name).each do |message|
+        object.errors.full_messages_for(name).each do |message|
           m.div(class: 'error-message') do |m|
             m.text messages
           end
