@@ -1,4 +1,5 @@
-module ErrorHandlers extend ActiveSupport::Concern
+module ErrorHandlers
+  extend ActiveSupport::Concern
 
   included do
     rescue_from Exception, with: :rescue500
@@ -10,25 +11,23 @@ module ErrorHandlers extend ActiveSupport::Concern
   end
 
   private
-
-  def rescue400 e
+  def rescue400(e)
     @exception = e
-    render 'errors/bad_request'  ,status:400
+    render 'errors/bad_request', status: 400
   end
 
-  def rescue403 e
+  def rescue403(e)
     @exception = e
-    render 'errors/forbidden', status:403
+    render 'errors/forbidden', status: 403
   end
 
-  def rescue404 e
+  def rescue404(e)
     @exception = e
-    render 'errors/not_found', status:404
+    render 'errors/not_found', status: 404
   end
 
   def rescue500(e)
     @exception = e
     render 'errors/internal_server_error', status: 500
   end
-
 end

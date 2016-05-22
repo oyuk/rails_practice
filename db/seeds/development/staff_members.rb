@@ -35,7 +35,7 @@ given_names = %w{
     given_name_kana: gn[1],
     password: 'password',
     start_date: (100 - n).days.ago.to_date,
-    end_date: n == 0 ? Date.today : Date.today + 50.days,
+    end_date: n == 0 ? Date.today : nil,
     suspended: n == 1
   )
 end

@@ -4,7 +4,8 @@ class Staff::PasswordsController < Staff::Base
   end
 
   def edit
-    @change_password_form = Staff::ChangePasswordForm.new(object: current_staff_member)
+    @change_password_form =
+      Staff::ChangePasswordForm.new(object: current_staff_member)
   end
 
   def update
@@ -20,10 +21,9 @@ class Staff::PasswordsController < Staff::Base
   end
 
   private
-
   def staff_member_params
     params.require(:staff_change_password_form).permit(
-    :current_password,:new_password,:new_password_confirmation
+      :current_password, :new_password, :new_password_confirmation
     )
   end
 end

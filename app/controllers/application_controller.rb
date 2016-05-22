@@ -11,7 +11,6 @@ class ApplicationController < ActionController::Base
   include ErrorHandlers if Rails.env.production?
 
   private
-
   def set_layout
     if params[:controller].match(%r{\A(staff|admin|customer)/})
       Regexp.last_match[1]
@@ -19,5 +18,4 @@ class ApplicationController < ActionController::Base
       'customer'
     end
   end
-
 end

@@ -1,5 +1,5 @@
-@import "colors";
-@import "dimensions";
+@import 'colors';
+@import 'dimensions';
 
 div#wrapper {
   div#container {
@@ -22,12 +22,15 @@ div#wrapper {
         div {
           padding: $wide;
           label {
-            display: black;
+            display: block;
             padding: $moderate 0;
           }
-          input[type='text'],input[type='password'] {
+          input[type='text'], input[type='password'] {
             padding: $wide;
             width: 400px - $wide * 4;
+          }
+          input[type='submit'] {
+            padding: $wide $wide * 2;
           }
         }
       }
