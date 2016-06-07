@@ -1,8 +1,11 @@
 class Customer < ActiveRecord::Base
-  include PersonalNormalizer
-  
+  include PersonalNameHolder
+
   has_one :home_address, dependent: :destroy, autosave: true
   has_one :work_address, dependent: :destroy, autosave: true
+  has_many :phones, dependent: :destroy
+  has_many :personal_phones, -> {where(address_id:nil).order(:id)},
+    class_name: 'Phone',autosave: true
 
   before_validation do
     self.email_for_index = email.downcase if email

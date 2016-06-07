@@ -1,4 +1,4 @@
-module PersonalNormalizer extend ActiveSupport::Concern
+module PersonalNameHolder extend ActiveSupport::Concern
 
   HUMAN_NAME_REGEXP = /\A[\p{han}\p{hiragana}\p{katakana}\u{30fc}\p{alpha}]+\z/
   KATAKANA_REGEXP = /\A[\p{katakana}\u{30fc}]+\z/
@@ -18,5 +18,5 @@ module PersonalNormalizer extend ActiveSupport::Concern
     validates :family_name_kana, :given_name_kana, presence: true,
       format: { with: KATAKANA_REGEXP, allow_blank: true }
 
-  end
+    end
 end
